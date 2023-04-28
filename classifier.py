@@ -23,7 +23,7 @@ st.write(f'ジャンルは{labels}です.')
 st.write('')
 model_selection = st.selectbox(label='モデルを選択してください.', options=model.keys())
 new_model = tf.keras.models.load_model(model[model_selection])
-uploaded_file = st.file_uploader("ファイルアップロード", type=['png', 'jpg', 'webp'])
+uploaded_file = st.file_uploader("ファイルアップロード", type=['png', 'jpg','jpeg', 'webp'])
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
