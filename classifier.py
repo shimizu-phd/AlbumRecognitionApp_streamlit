@@ -19,7 +19,7 @@ model = {'Xception1': './my_model.h5',
 st.title('AI Music Album Jacket Classifier')
 st.write('アルバムのジャケットから音楽のジャンルを推定します.')
 st.write('あなたのアルバムがどのジャンルに見えるのか推定します.')
-st.write(f'ジャンルは{labels}です.')
+st.write(f'ジャンルは{labels[0]}、{labels[1]}、{labels[2]}、{labels[3]}、{labels[4]}です.')
 st.write('')
 model_selection = st.selectbox(label='モデルを選択してください.', options=model.keys())
 new_model = tf.keras.models.load_model(model[model_selection])
