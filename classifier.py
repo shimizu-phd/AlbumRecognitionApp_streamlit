@@ -29,7 +29,7 @@ if uploaded_file is not None:
     image = image.convert("RGB")
     image_show = np.array(image)
 
-    st.image(image_show, caption='サムネイル画像', use_column_width=True)
+    st.image(image_show, caption='uploaded image', use_column_width=True)
 
     image = image.resize((img_size, img_size))
     image = np.array(image)
