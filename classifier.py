@@ -2,6 +2,7 @@ import streamlit as st
 import tensorflow as tf
 from PIL import Image
 import numpy as np
+import pandas as pd
 
 labels = ["Classic/Jazz", "Electronic/Experimental", "Metal", "R&B/Hip-Hop", "Rock/Pop"]
 n_class = len(labels)
@@ -46,6 +47,10 @@ if uploaded_file is not None:
         label = labels[idx]
         st.write(f'{round(ratio*100, 1)}%の割合で{label}の要素が含まれています。')
 
-
+    chart_data = pd.DataFrame(
+        pred[0]*100,
+        index=labels,
+        columns=['probability(%)'])
+    st.bar_chart(chart_data)
 
 
