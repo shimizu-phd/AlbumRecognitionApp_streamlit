@@ -17,10 +17,11 @@ model = {'Xception1': './my_model.h5',
          }
 
 st.title('AI Music Album Jacket Classifier')
-st.write('アルバムのジャケットから音楽のジャンルを推定します')
-st.write('あなたのアルバムがどのジャンルに見えるのか推定します')
+st.write('アルバムのジャケットから音楽のジャンルを推定します.')
+st.write('あなたのアルバムがどのジャンルに見えるのか推定します.')
+st.write(f'ジャンルは{labels}です.')
 st.write('')
-model_selection = st.selectbox(label='モデルを選択してください', options=model.keys())
+model_selection = st.selectbox(label='モデルを選択してください.', options=model.keys())
 new_model = tf.keras.models.load_model(model[model_selection])
 uploaded_file = st.file_uploader("ファイルアップロード", type=['png', 'jpg', 'webp'])
 
@@ -45,7 +46,7 @@ if uploaded_file is not None:
         idx = sorted_idx[i]
         ratio = pred[0][idx]
         label = labels[idx]
-        st.write(f'{round(ratio*100, 1)}%の割合で{label}の要素が含まれています。')
+        st.write(f'{round(ratio*100, 1)}%の割合で{label}の要素が含まれています.')
 
     chart_data = pd.DataFrame(
         pred[0]*100,
