@@ -22,8 +22,15 @@ st.write('あなたのアルバムがどのジャンルに見えるのか推定�
 st.write(f'ジャンルは{labels[0]}、{labels[1]}、{labels[2]}、{labels[3]}、{labels[4]}です.')
 st.write('')
 model_selection = st.selectbox(label='モデルを選択してください.', options=model.keys())
-new_model = tf.keras.models.load_model(model[model_selection])
-uploaded_file = st.file_uploader("ファイルアップロード", type=['png', 'jpg','jpeg', 'webp'])
+
+
+@st.cache_resource
+def load_model():
+    return tf.keras.models.load_model(model[model_selection])
+
+
+new_model = load_model()
+uploaded_file = st.file_uploader("ファイルアップロード", type=['png', 'jpg', 'jpeg', 'webp'])
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
@@ -46,12 +53,10 @@ if uploaded_file is not None:
         idx = sorted_idx[i]
         ratio = pred[0][idx]
         label = labels[idx]
-        st.write(f'{round(ratio*100, 1)}%の割合で{label}の要素が含まれています.')
+        st.write(f'{round(ratio * 100, 1)}%の割合で{label}の要素が含まれています.')
 
     chart_data = pd.DataFrame(
-        pred[0]*100,
+        pred[0] * 100,
         index=labels,
         columns=['probability(%)'])
     st.bar_chart(chart_data)
-
-
