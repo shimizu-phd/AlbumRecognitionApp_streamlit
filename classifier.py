@@ -25,11 +25,11 @@ model_selection = st.selectbox(label='モデルを選択してください.', op
 
 
 @st.cache_resource
-def load_model():
-    return tf.keras.models.load_model(model[model_selection])
+def load_model(selection):
+    return tf.keras.models.load_model(model[selection])
 
 
-new_model = load_model()
+new_model = load_model(model_selection)
 uploaded_file = st.file_uploader("ファイルアップロード", type=['png', 'jpg', 'jpeg', 'webp'])
 
 if uploaded_file is not None:
